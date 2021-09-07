@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { AppService, Tweet } from './app.service';
 
 @Controller()
@@ -28,5 +28,10 @@ export class AppController {
   @Post('tweets')
   createTweet(@Body() tweet: Tweet): Tweet {
     return this.appService.addTweet(tweet);
+  }
+
+  @Put('tweets/:id')
+  updateTweet(@Param('id') id: number, @Body() tweet: Tweet): Tweet {
+    return this.appService.updateTweet(id, tweet);
   }
 }
